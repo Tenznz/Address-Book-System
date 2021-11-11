@@ -21,7 +21,7 @@ public class AddressBook {
 		contactList.add(contact);
 	}
 
-	void addContact() {
+	private void addContact() {
 
 		Contact person = new Contact();
 		System.out.println("Enter your First Name");
@@ -52,7 +52,7 @@ public class AddressBook {
 
 	}
 
-	void display() {
+	private void display() {
 		int i = 1;
 		for (Contact s : contactList) {
 			System.out.println(
@@ -63,17 +63,17 @@ public class AddressBook {
 		}
 	}
 
-	public int getIndex(String firstName) {
-		int index=0;
-		for (Contact s : contactList) {
-			if (s.getFirstName().equals(firstName)) {
-				index=contactList.indexOf(s.getFirstName());
+	private int getIndex(String firstName) {
+		int index = -1;
+		for (int i = 0; i < contactList.size(); i++) {
+			if (firstName.equals(contactList.get(i).getFirstName())) {
+				return i;
 			}
 		}
 		return index;
 	}
 
-	public void updateContact(int i) {
+	private void updateContact(int i) {
 
 		System.out.println("Enter your First Name");
 		firstName = sc.next();
@@ -104,16 +104,27 @@ public class AddressBook {
 		do {
 			System.out.println("Enter\n1.Add\n2.Update\n3.Delete\n4.Print\n5.Exit");
 			act = sc.nextInt();
+			int index = -1;
+			String fName;
 			switch (act) {
 			case 1:
 				addressBook.addContact();
 				break;
 			case 2:
 				System.out.println("Enter your First name to update");
-				String fName = sc.next();
-				int index = addressBook.getIndex(fName);
+				 fName = sc.next();
+				index = addressBook.getIndex(fName);
+				if (index < 0) {
+					break;
+				}
 				addressBook.updateContact(index);
 				break;
+			case 3:
+				System.out.println("Enter your First name to delete");
+				 fName = sc.next();
+				index = addressBook.getIndex(fName);
+				addressBook.removeContact(index);
+
 			case 4:
 				addressBook.display();
 				break;
@@ -123,5 +134,10 @@ public class AddressBook {
 			}
 		} while (act > 0 || act > 5);
 		sc.close();
+	}
+
+	private void removeContact(int index) {
+		contactList.remove(index);
+
 	}
 }
