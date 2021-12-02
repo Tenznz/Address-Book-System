@@ -22,6 +22,7 @@ public class AddressBook {
 		Contact person = new Contact();
 		System.out.println("Enter your First Name");
 		firstName = sc.next();
+		if (getIndex(firstName)==-1) {
 		person.setFirstName(firstName);
 		System.out.println("Enter your Last Name");
 		lastName = sc.next();
@@ -45,7 +46,10 @@ public class AddressBook {
 		email = sc.next();
 		person.setEmail(email);
 		contactList.add(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
-
+		}else {
+			System.out.println("Dublicate value cant be add");
+		}
+	
 	}
 
 	public void display() {
@@ -87,9 +91,22 @@ public class AddressBook {
 		phoneNumber = sc.nextLong();
 		System.out.println("Enter your E-mail");
 		email = sc.next();
+		contactList.set(i, new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
+	}
 
-		contactList.set(i, (new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email)));
+	public void removeContact(int index) {
+		contactList.remove(index);
 
+	}
+
+	public Boolean checkDulicate(String name) {
+		Boolean check = false;
+		for (Contact contact : contactList) {
+			if (name == contact.getFirstName()) {
+				check = true;
+			}
+		}
+		return check;
 	}
 
 	public static void main(String[] args) {
@@ -133,8 +150,4 @@ public class AddressBook {
 		sc.close();
 	}
 
-	public void removeContact(int index) {
-		contactList.remove(index);
-
-	}
 }
