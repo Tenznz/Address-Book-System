@@ -13,7 +13,15 @@ public class AddressBook {
 	int zip;
 	long phoneNumber;
 	String email;
-	private List<Contact> contactList = new ArrayList<>();
+	private static List<Contact> contactList = new ArrayList<>();;
+
+	public static List<Contact> getContactList() {
+		return contactList;
+	}
+
+	public void setContactList(List<Contact> contactList) {
+		AddressBook.contactList = contactList;
+	}
 
 	Scanner sc = new Scanner(System.in);
 
@@ -77,6 +85,7 @@ public class AddressBook {
 
 		for (int i = 0; i < contactList.size(); i++) {
 			if (firstName.equals(contactList.get(i).getFirstName())) {
+
 				return true;
 			}
 		}

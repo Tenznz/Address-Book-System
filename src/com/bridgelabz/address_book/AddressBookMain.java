@@ -1,46 +1,20 @@
 package com.bridgelabz.address_book;
 
 import java.util.Scanner;
+import com.bridgelabz.address_book_map.MultipleAddressBook;
 
 public class AddressBookMain {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		AddressBook addressBook = new AddressBook();
-		int act;
-		System.out.println("Welcome to Address Book");
-		do {
-			System.out.println("Enter\n1.Add\n2.Update\n3.Delete\n4.Print\n5.Exit");
-			act = sc.nextInt();
-			int index = -1;
-			String fName;
-			switch (act) {
-			case 1:
-				addressBook.addContact();
-				break;
-			case 2:
-				System.out.println("Enter your First name to update");
-				fName = sc.next();
-				index = addressBook.getIndex(fName);
-				if (index < 0) {
-					break;
-				}
-				addressBook.updateContact(index);
-				break;
-			case 3:
-				System.out.println("Enter your First name to delete");
-				fName = sc.next();
-				index = addressBook.getIndex(fName);
-				addressBook.removeContact(index);
-				break;
 
-			case 4:
-				addressBook.display();
-				break;
-			case 5:
-				System.out.println("Bye Bye");
-				System.exit(0);
-			}
-		} while (act > 0 || act > 5);
-		sc.close();
+	public static void main(String[] args) {
+		MultipleAddressBook books = new MultipleAddressBook();
+		System.out.println("Add new AddressBook \n(Yes/No)");
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		while (str.equals("yes")) {
+			books.newAddressBook();
+			System.out.println("Add new AddressBook \n(Yes/No)");
+			str = sc.next();
+		}
+		books.displayBook();
 	}
 }
