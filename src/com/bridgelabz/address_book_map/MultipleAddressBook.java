@@ -21,10 +21,12 @@ public class MultipleAddressBook {
 		} else {
 			addAddressBook();
 			book.put(bookName, AddressBook.getContactList());
-
 		}
-
 	}
+
+//	public boolean searchName(String name) {
+//		return book.containsValue(name);
+//	}
 
 	public void addAddressBook() {
 

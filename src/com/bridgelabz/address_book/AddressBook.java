@@ -84,8 +84,7 @@ public class AddressBook {
 	public boolean checkDuplicate(String firstName) {
 
 		for (int i = 0; i < contactList.size(); i++) {
-			if (firstName.equals(contactList.get(i).getFirstName())) {
-
+			if (contactList.get(i).getFirstName().contains(firstName)) {
 				return true;
 			}
 		}
