@@ -10,10 +10,21 @@ public class AddressBook {
 	String address;
 	String city;
 	String state;
-	int zip;
-	long phoneNumber;
+	String zip;
+	String phoneNumber;
 	String email;
-	private static List<Contact> contactList = new ArrayList<>();;
+	static List<Contact> contactList;
+
+	public AddressBook() {
+		contactList = new ArrayList<>();
+	}
+
+	@Override
+	public String toString() {
+		return "AddressBook [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email
+				+ "]";
+	}
 
 	public static List<Contact> getContactList() {
 		return contactList;
@@ -45,10 +56,10 @@ public class AddressBook {
 			state = sc.next();
 			person.setState(state);
 			System.out.println("Enter your ZipCode");
-			zip = sc.nextInt();
+			zip = sc.next();
 			person.setZip(zip);
 			System.out.println("Enter your Phone Number");
-			phoneNumber = sc.nextLong();
+			phoneNumber = sc.next();
 			person.setPhoneNumber(phoneNumber);
 			System.out.println("Enter your E-mail");
 			email = sc.next();
@@ -91,6 +102,31 @@ public class AddressBook {
 		return false;
 	}
 
+	public Contact getContactDetails(String firstName) {
+		for (int i = 0; i < contactList.size(); i++) {
+			if (contactList.get(i).getFirstName().contains(firstName)) {
+				return contactList.get(i);
+			}
+		}
+		return null;
+	}
+
+	public void searchByCityName() {
+		System.out.println("Enter City Name or State Name");
+		String searchText = sc.next();
+		int count = 0;
+		for (int i = 0; i < contactList.size(); i++) {
+			if (contactList.get(i).getCity().contains(searchText)
+					|| contactList.get(i).getState().contains(searchText)) {
+				count++;
+				System.out.println("Search by city name : " + contactList.get(i));
+			}
+		}
+		if (count == 0) {
+			System.out.println("city or state not found in Address Book");
+		}
+	}
+
 	public void updateContact(int i) {
 
 		System.out.println("Enter your First Name");
@@ -104,9 +140,9 @@ public class AddressBook {
 		System.out.println("Enter your State");
 		state = sc.next();
 		System.out.println("Enter your ZipCode");
-		zip = sc.nextInt();
+		zip = sc.next();
 		System.out.println("Enter your Phone Number");
-		phoneNumber = sc.nextLong();
+		phoneNumber = sc.next();
 		System.out.println("Enter your E-mail");
 		email = sc.next();
 		contactList.set(i, new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
@@ -114,7 +150,6 @@ public class AddressBook {
 
 	public void removeContact(int index) {
 		contactList.remove(index);
-
 	}
 
 }

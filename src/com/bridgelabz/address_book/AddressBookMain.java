@@ -11,10 +11,13 @@ public class AddressBookMain {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
 		while (str.equals("yes")) {
-			books.newAddressBook();
+		books.newAddressBook();
 			System.out.println("Add new AddressBook \n(Yes/No)");
 			str = sc.next();
 		}
 		books.displayBook();
+		System.out.println("Enter Search name");
+		String name = sc.next();
+		books.searchByName(name);
 	}
 }
