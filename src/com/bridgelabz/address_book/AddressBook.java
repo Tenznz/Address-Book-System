@@ -116,10 +116,12 @@ public class AddressBook {
 		return null;
 	}
 
+	private int count = 0;
+
 	public Map<String, String> searchByCityName() {
 		System.out.println("Enter City Name or State Name");
 		String searchText = sc.next();
-		int count = 0;
+
 		Map<String, String> a = new HashMap<>();
 		for (int i = 0; i < contactList.size(); i++) {
 			if (contactList.get(i).getCity().contains(searchText)) {
@@ -134,6 +136,10 @@ public class AddressBook {
 			System.out.println("city or state not found in Address Book");
 		}
 		return a;
+	}
+
+	public int getCount() {
+		return count;
 	}
 
 	public void updateContact(int i) {

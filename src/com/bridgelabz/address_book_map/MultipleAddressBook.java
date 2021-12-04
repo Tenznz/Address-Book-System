@@ -10,7 +10,7 @@ import com.bridgelabz.address_book.AddressBook;
 import com.bridgelabz.address_book.Contact;
 
 public class MultipleAddressBook {
-	Map<String, List<Contact>> book = new HashMap<>();
+	Map<String, AddressBook> book = new HashMap<>();
 	AddressBook addressBook = new AddressBook();
 	Contact contact = new Contact();
 	Scanner sc = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class MultipleAddressBook {
 			System.out.println("Address book name exists");
 		} else {
 			addAddressBook();
-			book.put(bookName, contact.getStore());
+			book.put(bookName, addressBook);
 		}
 	}
 //	public void addNewAddressBook() {
@@ -44,19 +44,19 @@ public class MultipleAddressBook {
 //		}
 //	}
 
-	public void searchByName(String name) {
-
-		for (String entry : book.keySet()) {
-			Contact contact = addressBook.getContactDetails(name);
-			if (contact == null) {
-				System.out.println("contact not found");
-			} else {
-				System.out.println(contact);
-			}
-			return;
-		}
-		System.out.println("Not Found");
-	}
+//	public void searchByName(String name) {
+//
+//		for (String entry : book.keySet()) {
+//			Contact contact = addressBook.getContactDetails(name);
+//			if (contact == null) {
+//				System.out.println("contact not found");
+//			} else {
+//				System.out.println(contact);
+//			}
+//			return;
+//		}
+//		System.out.println("Not Found");
+//	}
 
 	public void addAddressBook() {
 		int act;
@@ -93,8 +93,10 @@ public class MultipleAddressBook {
 			case 5:
 				Map<String, String> map = new HashMap<>();
 				map = addressBook.searchByCityName();
+				int i = 1;
+				System.out.println("Total count " + addressBook.getCount());
 				for (Map.Entry<String, String> entry : map.entrySet()) {
-					System.out.println(entry.getKey() + "-" + entry.getValue());
+					System.out.println((i++) + "." + entry.getKey() + "-" + entry.getValue());
 				}
 				break;
 			case 6:
@@ -112,7 +114,7 @@ public class MultipleAddressBook {
 	public void displayBook() {
 		System.out.println("Total AddressBooks");
 		int i = 1;
-		for (Entry<String, List<Contact>> entry : book.entrySet()) {
+		for (Entry<String, AddressBook> entry : book.entrySet()) {
 			System.out.println((i++) + "." + entry.getKey());
 		}
 	}

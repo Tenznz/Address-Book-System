@@ -16,8 +16,8 @@ public class AddressBookMain {
 			str = sc.next();
 		}
 		books.displayBook();
-		System.out.println("Enter Search name");
-		String name = sc.next();
-		books.searchByName(name);
+//		System.out.println("Enter Search name");
+//		String name = sc.next();
+//		books.searchByName(name);
 	}
 }
