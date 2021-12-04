@@ -1,6 +1,7 @@
 package com.bridgelabz.address_book_map;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import com.bridgelabz.address_book.AddressBook;
 import com.bridgelabz.address_book.Contact;
 
 public class MultipleAddressBook {
-	Map<String, AddressBook> book = new HashMap<>();
+	Map<String, List<Contact>> book = new HashMap<>();
 	AddressBook addressBook = new AddressBook();
 	Contact contact = new Contact();
 	Scanner sc = new Scanner(System.in);
@@ -22,7 +23,7 @@ public class MultipleAddressBook {
 			System.out.println("Address book name exists");
 		} else {
 			addAddressBook();
-			book.put(bookName, addressBook);
+			book.put(bookName, contact.getStore());
 		}
 	}
 //	public void addNewAddressBook() {
@@ -59,6 +60,7 @@ public class MultipleAddressBook {
 
 	public void addAddressBook() {
 		int act;
+
 		System.out.println("Welcome to Address Book");
 		do {
 			System.out.println("Enter\n1.Add\n2.Update\n3.Delete\n4.Print\n5.Search by City or State\n6.Exit");
@@ -89,7 +91,12 @@ public class MultipleAddressBook {
 				addressBook.display();
 				break;
 			case 5:
-				addressBook.searchByCityName();
+				Map<String, String> map = new HashMap<>();
+				map = addressBook.searchByCityName();
+				for (Map.Entry<String, String> entry : map.entrySet()) {
+					System.out.println(entry.getKey() + "-" + entry.getValue());
+				}
+				break;
 			case 6:
 				System.out.println("exit " + bookName);
 				act = 0;
@@ -97,13 +104,15 @@ public class MultipleAddressBook {
 
 		} while (act > 0 || act > 5);
 		contact.setStore(AddressBook.getContactList());
+		new AddressBook();
+		System.out.println(contact.getStore());
 
 	}
 
 	public void displayBook() {
 		System.out.println("Total AddressBooks");
 		int i = 1;
-		for (Entry<String, AddressBook> entry : book.entrySet()) {
+		for (Entry<String, List<Contact>> entry : book.entrySet()) {
 			System.out.println((i++) + "." + entry.getKey());
 		}
 	}

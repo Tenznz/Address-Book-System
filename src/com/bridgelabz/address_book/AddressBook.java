@@ -1,7 +1,9 @@
 package com.bridgelabz.address_book;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -71,9 +73,12 @@ public class AddressBook {
 
 	}
 
+	Contact contact = new Contact();
+
 	public void display() {
+
 		int i = 1;
-		for (Contact s : contactList) {
+		for (Contact s : contact.getStore()) {
 			System.out.println(
 					"Contact." + i + " [ FirstName=" + s.getFirstName() + ", FastName=" + s.getLastName() + ", Address="
 							+ s.getAddress() + ", city=" + s.getCity() + ", state=" + s.getState() + ", zip-code="
@@ -103,28 +108,32 @@ public class AddressBook {
 	}
 
 	public Contact getContactDetails(String firstName) {
-		for (int i = 0; i < contactList.size(); i++) {
-			if (contactList.get(i).getFirstName().contains(firstName)) {
-				return contactList.get(i);
+		for (int i = 0; i < contact.getStore().size(); i++) {
+			if (contact.getStore().get(i).getFirstName().contains(firstName)) {
+				return contact.getStore().get(i);
 			}
 		}
 		return null;
 	}
 
-	public void searchByCityName() {
+	public Map<String, String> searchByCityName() {
 		System.out.println("Enter City Name or State Name");
 		String searchText = sc.next();
 		int count = 0;
+		Map<String, String> a = new HashMap<>();
 		for (int i = 0; i < contactList.size(); i++) {
-			if (contactList.get(i).getCity().contains(searchText)
-					|| contactList.get(i).getState().contains(searchText)) {
+			if (contactList.get(i).getCity().contains(searchText)) {
 				count++;
-				System.out.println("Search by city name : " + contactList.get(i));
+				a.put(contactList.get(i).getFirstName(), contactList.get(i).getCity());
+			} else if (contactList.get(i).getState().contains(searchText)) {
+				count++;
+				a.put(contactList.get(i).getFirstName(), contactList.get(i).getState());
 			}
 		}
 		if (count == 0) {
 			System.out.println("city or state not found in Address Book");
 		}
+		return a;
 	}
 
 	public void updateContact(int i) {
