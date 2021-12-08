@@ -7,8 +7,8 @@ public class Contact {
 	private String address;
 	private String city;
 	private String state;
-	private int zip;
-	private long phoneNumber;
+	private String zip;
+	private String phoneNumber;
 	private String email;
 
 	@Override
@@ -19,10 +19,11 @@ public class Contact {
 	}
 
 	public Contact() {
+
 	}
 
-	Contact(String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber,
-			String email) {
+	Contact(String firstName, String lastName, String address, String city, String state, String zip,
+			String phoneNumber, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -53,11 +54,11 @@ public class Contact {
 		return state;
 	}
 
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -81,11 +82,11 @@ public class Contact {
 		this.state = state;
 	}
 
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

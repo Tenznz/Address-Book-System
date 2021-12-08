@@ -3,24 +3,25 @@ package com.bridgelabz.address_book_map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.bridgelabz.address_book.AddressBook;
 
 public class MultipleAddressBook {
-	Map<String, List> book = new HashMap();
+	Map<String, List> book = new HashMap<>();
 	Scanner sc = new Scanner(System.in);
 	String bookName;
 
 	public void newAddressBook() {
+
+		AddressBook addressBook = new AddressBook();
 		System.out.println("Enter Book name");
 		bookName = sc.next();
 		if (book.containsKey(bookName)) {
 			System.out.println("Address book name exists");
 		} else {
 			addAddressBook();
-			book.put(bookName, AddressBook.getContactList());
+			book.put(bookName, addressBook.getContactList());
 
 		}
 
@@ -68,10 +69,7 @@ public class MultipleAddressBook {
 	}
 
 	public void displayBook() {
-		System.out.println("AddressBooks");
-		for (Entry<String, List> entry : book.entrySet()) {
-			System.out.println("Address Book name is " + entry.getKey() + "\nvalue :-\n" + entry.getValue().toString());
-		}
+		book.entrySet().stream().forEach(el -> System.out.println(el));
 	}
 
 }

@@ -7,14 +7,17 @@ public class AddressBookMain {
 
 	public static void main(String[] args) {
 		MultipleAddressBook books = new MultipleAddressBook();
+		new AddressBook();
 		System.out.println("Add new AddressBook \n(Yes/No)");
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
 		while (str.equals("yes")) {
+
 			books.newAddressBook();
 			System.out.println("Add new AddressBook \n(Yes/No)");
 			str = sc.next();
 		}
 		books.displayBook();
+		sc.close();
 	}
 }
