@@ -10,12 +10,16 @@ public class AddressBook {
 	String address;
 	String city;
 	String state;
-	int zip;
-	long phoneNumber;
+	String zip;
+	String phoneNumber;
 	String email;
-	private static List<Contact> contactList = new ArrayList<>();;
+	private static List<Contact> contactList;
 
-	public static List<Contact> getContactList() {
+	public AddressBook() {
+		contactList = new ArrayList<>();
+	}
+
+	public List<Contact> getContactList() {
 		return contactList;
 	}
 
@@ -45,10 +49,10 @@ public class AddressBook {
 			state = sc.next();
 			person.setState(state);
 			System.out.println("Enter your ZipCode");
-			zip = sc.nextInt();
+			zip = sc.next();
 			person.setZip(zip);
 			System.out.println("Enter your Phone Number");
-			phoneNumber = sc.nextLong();
+			phoneNumber = sc.next();
 			person.setPhoneNumber(phoneNumber);
 			System.out.println("Enter your E-mail");
 			email = sc.next();
@@ -61,14 +65,7 @@ public class AddressBook {
 	}
 
 	public void display() {
-		int i = 1;
-		for (Contact s : contactList) {
-			System.out.println(
-					"Contact." + i + " [ FirstName=" + s.getFirstName() + ", FastName=" + s.getLastName() + ", Address="
-							+ s.getAddress() + ", city=" + s.getCity() + ", state=" + s.getState() + ", zip-code="
-							+ s.getZip() + ", Phone Number=" + s.getPhoneNumber() + ", email=" + s.getEmail() + "]");
-			i++;
-		}
+		contactList.stream().forEach(System.out::println);
 	}
 
 	public int getIndex(String firstName) {
@@ -104,9 +101,9 @@ public class AddressBook {
 		System.out.println("Enter your State");
 		state = sc.next();
 		System.out.println("Enter your ZipCode");
-		zip = sc.nextInt();
+		zip = sc.next();
 		System.out.println("Enter your Phone Number");
-		phoneNumber = sc.nextLong();
+		phoneNumber = sc.next();
 		System.out.println("Enter your E-mail");
 		email = sc.next();
 		contactList.set(i, new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
