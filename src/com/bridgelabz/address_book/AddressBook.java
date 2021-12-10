@@ -1,9 +1,7 @@
 package com.bridgelabz.address_book;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -28,7 +26,7 @@ public class AddressBook {
 				+ "]";
 	}
 
-	public static List<Contact> getContactList() {
+	public List<Contact> getContactList() {
 		return contactList;
 	}
 
@@ -73,18 +71,9 @@ public class AddressBook {
 
 	}
 
-	Contact contact = new Contact();
-
 	public void display() {
 
-		int i = 1;
-		for (Contact s : contact.getStore()) {
-			System.out.println(
-					"Contact." + i + " [ FirstName=" + s.getFirstName() + ", FastName=" + s.getLastName() + ", Address="
-							+ s.getAddress() + ", city=" + s.getCity() + ", state=" + s.getState() + ", zip-code="
-							+ s.getZip() + ", Phone Number=" + s.getPhoneNumber() + ", email=" + s.getEmail() + "]");
-			i++;
-		}
+		contactList.forEach(System.out::println);
 	}
 
 	public int getIndex(String firstName) {
@@ -108,32 +97,20 @@ public class AddressBook {
 	}
 
 	public Contact getContactDetails(String firstName) {
-		for (int i = 0; i < contact.getStore().size(); i++) {
-			if (contact.getStore().get(i).getFirstName().contains(firstName)) {
-				return contact.getStore().get(i);
+		for (int i = 0; i < contactList.size(); i++) {
+			if (contactList.get(i).getFirstName().contains(firstName)) {
+				return contactList.get(i);
 			}
 		}
 		return null;
 	}
 
-	public Map<String, String> searchByCityName() {
-		System.out.println("Enter City Name or State Name");
+	public void viewByCityOrStateName() {
+		System.out.println("Enter State or city Name");
 		String searchText = sc.next();
-		int count = 0;
-		Map<String, String> a = new HashMap<>();
-		for (int i = 0; i < contactList.size(); i++) {
-			if (contactList.get(i).getCity().contains(searchText)) {
-				count++;
-				a.put(contactList.get(i).getFirstName(), contactList.get(i).getCity());
-			} else if (contactList.get(i).getState().contains(searchText)) {
-				count++;
-				a.put(contactList.get(i).getFirstName(), contactList.get(i).getState());
-			}
-		}
-		if (count == 0) {
-			System.out.println("city or state not found in Address Book");
-		}
-		return a;
+		contactList.stream().filter(el -> (el.getCity().equals(searchText) || el.getState().equals(searchText)))
+				.forEach(p -> System.out.println("First Name :" + p.getFirstName() + "Last Name:" + p.getLastName()));
+
 	}
 
 	public void updateContact(int i) {
