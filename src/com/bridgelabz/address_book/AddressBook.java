@@ -26,7 +26,7 @@ public class AddressBook {
 				+ "]";
 	}
 
-	public static List<Contact> getContactList() {
+	public List<Contact> getContactList() {
 		return contactList;
 	}
 
@@ -71,15 +71,11 @@ public class AddressBook {
 
 	}
 
+	Contact contact = new Contact();
+
 	public void display() {
-		int i = 1;
-		for (Contact s : contactList) {
-			System.out.println(
-					"Contact." + i + " [ FirstName=" + s.getFirstName() + ", FastName=" + s.getLastName() + ", Address="
-							+ s.getAddress() + ", city=" + s.getCity() + ", state=" + s.getState() + ", zip-code="
-							+ s.getZip() + ", Phone Number=" + s.getPhoneNumber() + ", email=" + s.getEmail() + "]");
-			i++;
-		}
+
+		contactList.forEach(System.out::println);
 	}
 
 	public int getIndex(String firstName) {
@@ -111,20 +107,12 @@ public class AddressBook {
 		return null;
 	}
 
-	public void searchByCityName() {
-		System.out.println("Enter City Name or State Name");
+	public void searchByCityOrStateName() {
+		System.out.println("Enter State Name");
 		String searchText = sc.next();
-		int count = 0;
-		for (int i = 0; i < contactList.size(); i++) {
-			if (contactList.get(i).getCity().contains(searchText)
-					|| contactList.get(i).getState().contains(searchText)) {
-				count++;
-				System.out.println("Search by city name : " + contactList.get(i));
-			}
-		}
-		if (count == 0) {
-			System.out.println("city or state not found in Address Book");
-		}
+		contactList.stream().filter(el -> (el.getCity().equals(searchText) || el.getState().equals(searchText)))
+				.forEach(System.out::println);
+
 	}
 
 	public void updateContact(int i) {
