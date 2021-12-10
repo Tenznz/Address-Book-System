@@ -108,8 +108,12 @@ public class AddressBook {
 	public void viewByCityOrStateName() {
 		System.out.println("Enter State or city Name");
 		String searchText = sc.next();
+		Long count = contactList.stream()
+				.filter(el -> (el.getCity().equals(searchText) || el.getState().equals(searchText)))
+				.peek(System.out::println).count();
+		System.out.println("Total count in this city or state " + count);
 		contactList.stream().filter(el -> (el.getCity().equals(searchText) || el.getState().equals(searchText)))
-				.forEach(p -> System.out.println("First Name :" + p.getFirstName() + "Last Name:" + p.getLastName()));
+				.forEach(p -> System.out.println("First Name :" + p.getFirstName() + "\tLast Name:" + p.getLastName()));
 
 	}
 
