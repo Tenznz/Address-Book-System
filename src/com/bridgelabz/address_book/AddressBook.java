@@ -1,8 +1,10 @@
 package com.bridgelabz.address_book;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 	String firstName;
@@ -140,6 +142,23 @@ public class AddressBook {
 
 	public void removeContact(int index) {
 		contactList.remove(index);
+	}
+
+	public void sort_by_PersonName() {
+
+		List<Contact> sortedContact = contactList.stream().sorted(new compareToFirstName())
+				.collect(Collectors.toList());
+		System.out.println(sortedContact);
+	}
+
+}
+
+class compareToFirstName implements Comparator<Contact> {
+
+	@Override
+	public int compare(Contact c1, Contact c2) {
+
+		return c1.getFirstName().compareTo(c2.getFirstName());
 	}
 
 }
