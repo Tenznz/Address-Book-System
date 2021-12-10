@@ -67,14 +67,24 @@ public class MultipleAddressBook {
 				addressBook.viewByCityOrStateName();
 				break;
 			case 6:
-				addressBook.sort_by_PersonName();
+				System.out.println("Sort by \n1.Name\n2.ZipCode\n3.City\n4.State");
+				int input = sc.nextInt();
+				if (input == 1)
+					addressBook.sortByPersonName();
+				else if (input == 2) {
+					addressBook.sortedContactByZip();
+				} else if (input == 3) {
+					addressBook.sortedContactByCity();
+				} else if (input == 4) {
+					addressBook.sortedContactByState();
+				}
 				break;
 			case 7:
 				System.out.println("exit " + bookName);
 				act = 0;
 			}
 
-		} while (act > 0 || act > 5);
+		} while (act > 0 || act > 8);
 
 	}
 
