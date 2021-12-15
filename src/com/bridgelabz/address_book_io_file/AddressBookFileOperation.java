@@ -4,41 +4,56 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
-import com.bridgelabz.address_book.AddressBook;
+import com.bridgelabz.address_book.Contact;
 import com.bridgelabz.address_book_map.MultipleAddressBook;
 
 public class AddressBookFileOperation {
-	public static final String loc = "D:\\project\\Learning_Path\\RFP\\Address-Book-System\\src\\AddressBook";
+	int counter = 1;
+//	public static final String loc = "D:\\project\\Learning_Path\\RFP\\Address-Book-System\\src\\AddressBook";
+	public static final String addressBookFolder = "D:\\project\\Learning_Path\\RFP\\Address-Book-System\\src";
 
-	public void readAddressBookData() throws FileNotFoundException {
+	public void readAddressBookData(String name) throws FileNotFoundException {
 
-		File file = new File(loc);
+		File file = new File(addressBookFolder + "\\" + name + "\\" + name + ".txt");
 		Scanner sf = new Scanner(file);
-
-		String data = null;
+		System.out.println(name + ":-\n");
 		while (sf.hasNextLine())
-			data = sf.nextLine();
-		System.out.println("AddressBook:-\n" + data);
+			System.out.println("AddressBook:-\n" + sf.nextLine());
+		sf.close();
 	}
 
-	public void writeAddressBookData(AddressBook ad) throws IOException {
-		MultipleAddressBook ma = new MultipleAddressBook();
-		FileWriter output = new FileWriter(loc);
-//		 Writes string to the file
-//		String data = ma.book.entrySet().toArray().toString();
-//		for (Entry<String, List> a : ma.book.entrySet()) {
-//			data = data + (String) a.getKey();
-//		}
-//		System.out.print(data);
-		
-		output.write(ad.getContactList().toString());
-		System.out.println("Data file.");
+	public void writeAddressBookData(List<Contact> contactList) throws IOException {
+		String url = addressBookFolder + "\\" + MultipleAddressBook.bookName;
+		Path bookPath = Paths.get(url);
+//		if (Files.exists(bookPath))
+//			deleteFiles(bookPath.toFile());
 
-		// Closes the writer
-		output.close();
+		Files.createDirectories(bookPath);
+		String bookFileWrite = url + "\\" + MultipleAddressBook.bookName + ".txt";
+		Path bookFile = Paths.get(bookFileWrite);
+		Files.createFile(bookFile);
+
+		FileWriter output = new FileWriter(bookFileWrite);
+		StringBuffer addressBuffer = new StringBuffer();
+		contactList.forEach(contact -> {
+			String employeeDataString = contact.toString().concat("\n");
+			addressBuffer.append(employeeDataString);
+		});
+		output.write(addressBuffer.toString());
+		System.out.println("Data added in file.");
+		output.close(); // Closes the writer
+
 	}
+
+//	private boolean deleteFiles(File file) {		
+//				deleteFiles(file);
+//		return file.delete();
+//
+//	}
 }

@@ -2,6 +2,8 @@ package com.bridgelabz.address_book;
 
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.bridgelabz.address_book_io_file.AddressBookFileOperation;
 import com.bridgelabz.address_book_map.MultipleAddressBook;
 
 public class AddressBookMain {
@@ -20,8 +22,9 @@ public class AddressBookMain {
 
 	}
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		Scanner sc = new Scanner(System.in);
+		AddressBookFileOperation fileIO = new AddressBookFileOperation();
 		AddressBookMain ab = new AddressBookMain();
 		int input = 0;
 		do {
@@ -32,7 +35,9 @@ public class AddressBookMain {
 				ab.addNewAddressBook();
 				break;
 			case 2:
-				ab.books.displayBook();
+				System.out.println("Enter Book name");
+				String bookName = sc.next();
+				fileIO.readAddressBookData(bookName);
 			case 3:
 				System.exit(0);
 			}

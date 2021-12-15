@@ -31,7 +31,6 @@ public class AddressBook {
 	public List<Contact> getContactList() {
 		return contactList;
 	}
-	
 
 	public void setContactList(List<Contact> contactList) {
 		AddressBook.contactList = contactList;
@@ -39,7 +38,7 @@ public class AddressBook {
 
 	Scanner sc = new Scanner(System.in);
 
-	public void addContact() {
+	public List<Contact> addContact() {
 
 		Contact person = new Contact();
 		System.out.println("Enter your First Name");
@@ -71,6 +70,7 @@ public class AddressBook {
 		} else {
 			System.out.println("Duplicate value cant be add");
 		}
+		return contactList;
 
 	}
 
@@ -165,7 +165,6 @@ public class AddressBook {
 	public void sortedContactByZip() {
 		contactList.stream().sorted(new compareZip()).forEach(System.out::println);
 	}
-
 
 }
 
