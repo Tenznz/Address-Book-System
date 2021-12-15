@@ -31,6 +31,7 @@ public class AddressBook {
 	public List<Contact> getContactList() {
 		return contactList;
 	}
+	
 
 	public void setContactList(List<Contact> contactList) {
 		AddressBook.contactList = contactList;
@@ -164,6 +165,8 @@ public class AddressBook {
 	public void sortedContactByZip() {
 		contactList.stream().sorted(new compareZip()).forEach(System.out::println);
 	}
+
+
 }
 
 class compareToFirstName implements Comparator<Contact> {

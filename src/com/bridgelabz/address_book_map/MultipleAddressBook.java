@@ -1,5 +1,6 @@
 package com.bridgelabz.address_book_map;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,17 +8,18 @@ import java.util.Scanner;
 
 import com.bridgelabz.address_book.AddressBook;
 import com.bridgelabz.address_book.Contact;
+import com.bridgelabz.address_book_io_file.AddressBookFileOperation;
 
 public class MultipleAddressBook {
 
-	Map<String, List> book = new HashMap<>();
+	public Map<String, List> book = new HashMap<>();
 
 	AddressBook addressBook = new AddressBook();
 	Contact contact = new Contact();
 	Scanner sc = new Scanner(System.in);
 	String bookName;
 
-	public void newAddressBook() {
+	public void newAddressBook() throws IOException {
 		System.out.println("Enter Book name");
 		bookName = sc.next();
 		if (book.containsKey(bookName)) {
@@ -30,7 +32,7 @@ public class MultipleAddressBook {
 		}
 	}
 
-	public void addAddressBook() {
+	public void addAddressBook() throws IOException {
 		int act;
 
 		System.out.println("Welcome to Address Book");
@@ -62,6 +64,8 @@ public class MultipleAddressBook {
 
 			case 4:
 				addressBook.display();
+				AddressBookFileOperation fileIO = new AddressBookFileOperation();
+				fileIO.writeAddressBookData(addressBook);
 				break;
 			case 5:
 				addressBook.viewByCityOrStateName();
@@ -82,13 +86,14 @@ public class MultipleAddressBook {
 			case 7:
 				System.out.println("exit " + bookName);
 				act = 0;
+
 			}
 
 		} while (act > 0 || act > 8);
 
 	}
 
-	public void displayBook() {
+	public void displayBook() throws IOException {
 		System.out.println("Total AddressBooks");
 
 		book.entrySet().stream().forEach(System.out::println);

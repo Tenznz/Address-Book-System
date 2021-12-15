@@ -1,5 +1,6 @@
 package com.bridgelabz.address_book;
 
+import java.io.IOException;
 import java.util.Scanner;
 import com.bridgelabz.address_book_map.MultipleAddressBook;
 
@@ -7,7 +8,7 @@ public class AddressBookMain {
 
 	MultipleAddressBook books = new MultipleAddressBook();
 
-	public void addNewAddressBook() {
+	public void addNewAddressBook() throws IOException {
 		System.out.println("Add new AddressBook \n(Yes/No)");
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
@@ -19,7 +20,7 @@ public class AddressBookMain {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		Scanner sc = new Scanner(System.in);
 		AddressBookMain ab = new AddressBookMain();
 		int input = 0;
