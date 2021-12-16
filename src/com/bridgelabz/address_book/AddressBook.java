@@ -21,7 +21,6 @@ public class AddressBook {
 		contactList = new ArrayList<>();
 	}
 
-
 	public List<Contact> getContactList() {
 		return contactList;
 	}
@@ -133,17 +132,6 @@ public class AddressBook {
 		System.out.println("Enter your E-mail");
 		email = sc.next();
 		contactList.set(i, new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
-	}
-	//
-	public String convertToCSV() {
-		String list="";
-		for (Contact con : contactList) {
-			list=con.getFirstName()+","+con.getLastName()+",";
-			System.out.println(list);
-		}
-		
-		return list;
-		
 	}
 
 	public void removeContact(int index) {
