@@ -1,1 +1,2 @@
-Contact[firstName=ten, lastName=duk, address=India, city=banglore, state=karnataka, zip=123, phoneNumber=12312312, email=duk@gmail.com]
+firstName=ten, lastName=duk, address=india, city=banglore, state=karnataka, zip=123, phoneNumber=1231231231, email=duk@gmail.com
+firstName=raju, lastName=rastoki, address=india, city=delhi, state=delhi, zip=123, phoneNumber=1231231232, email=raju@gmail.com

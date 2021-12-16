@@ -23,6 +23,7 @@ public class AddressBookMain {
 	}
 
 	public static void main(String[] args) throws IOException {
+		AddressBook ad=new AddressBook();
 		Scanner sc = new Scanner(System.in);
 		AddressBookFileOperation fileIO = new AddressBookFileOperation();
 		AddressBookMain ab = new AddressBookMain();
@@ -41,6 +42,6 @@ public class AddressBookMain {
 			case 3:
 				System.exit(0);
 			}
-		} while (input > 0 || input < 4);
+		} while (input > 0 || input < 4);	
 	}
 }

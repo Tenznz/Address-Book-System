@@ -13,9 +13,8 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[firstName=" + firstName + ", lastName=" + lastName + ", address="
-				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + "]";
+		return "firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email;
 	}
 
 	public Contact() {

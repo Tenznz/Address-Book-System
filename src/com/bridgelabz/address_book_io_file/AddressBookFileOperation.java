@@ -24,7 +24,7 @@ public class AddressBookFileOperation {
 		Scanner sf = new Scanner(file);
 		System.out.println(name + ":-\n");
 		while (sf.hasNextLine())
-			System.out.println("AddressBook:-\n" + sf.nextLine());
+			System.out.println(sf.nextLine());
 		sf.close();
 	}
 
