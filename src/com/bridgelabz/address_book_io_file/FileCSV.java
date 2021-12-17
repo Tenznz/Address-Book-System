@@ -1,6 +1,6 @@
-package com.bridgelabz.address_book;
+package com.bridgelabz.address_book_io_file;
 
-import com.bridgelabz.address_book_io_file.AddressBookFileOperation;
+import com.bridgelabz.address_book.Contact;
 import com.bridgelabz.address_book_map.MultipleAddressBook;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
@@ -16,11 +16,10 @@ import java.io.Reader;
 
 public class FileCSV implements ReadWrite {
 	MultipleAddressBook ad = new MultipleAddressBook();
-	String url = AddressBookFileOperation.addressBookFolder;
-
+	
 	@Override
 	public void read(String bookName) throws IOException {
-		try (Reader reader = Files.newBufferedReader(Paths.get(url + "\\" + bookName+"\\"+bookName+ ".csv"));) {
+		try (Reader reader = Files.newBufferedReader(Paths.get(AddressBookFileOperation.addressBookFolder + "\\" + bookName+"\\"+bookName+ ".csv"));) {
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			CsvToBean<Contact> csvToBean = new CsvToBeanBuilder(reader).withType(Contact.class)
 					.withIgnoreLeadingWhiteSpace(true).build();
@@ -32,6 +31,7 @@ public class FileCSV implements ReadWrite {
 				System.out.println("Name First : " + csvUser.getFirstName());
 				System.out.println("Name Last: " + csvUser.getLastName());
 				System.out.println("address: " + csvUser.getAddress());
+				System.out.println("State: "+csvUser.getState());
 				System.out.println("city : " + csvUser.getCity());
 				System.out.println("zip : " + csvUser.getZip());
 				System.out.println("PhoneNo : " + csvUser.getPhoneNumber());
@@ -44,7 +44,7 @@ public class FileCSV implements ReadWrite {
 
 	@Override
 	public void write(List<Contact> contactList) throws IOException {
-		String bookFileWrite = url + "\\" + MultipleAddressBook.bookName+ "\\" + MultipleAddressBook.bookName + ".csv";
+		String bookFileWrite = AddressBookFileOperation.addressBookFolder + "\\" + MultipleAddressBook.bookName+ "\\" + MultipleAddressBook.bookName + ".csv";
 		Path bookFile = Paths.get(bookFileWrite);
 		Files.createFile(bookFile);
 

@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 import com.bridgelabz.address_book.AddressBook;
 import com.bridgelabz.address_book.Contact;
-import com.bridgelabz.address_book.FileCSV;
 import com.bridgelabz.address_book_io_file.AddressBookFileOperation;
+import com.bridgelabz.address_book_io_file.FileCSV;
+import com.bridgelabz.address_book_io_file.FileJSON;
 
 public class MultipleAddressBook {
 	public Map<String, List<Contact>> book = new HashMap<>();
@@ -88,6 +89,8 @@ public class MultipleAddressBook {
 		fileIO.write(contactList);
 		FileCSV csv = new FileCSV();
 		csv.write(contactList);
+		FileJSON json=new FileJSON();
+		json.write(contactList);
 
 	}
 

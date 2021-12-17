@@ -1,0 +1,2 @@
+firstName=Tenzing, lastName=Dhugkar, address=India, city=Banglore, state=Karnataka, zip=123, phoneNumber=1231231222, email=duk@gmail.com
+firstName=Raju, lastName=Sham, address=India, city=Bombay, state=Maharastra, zip=987, phoneNumber=1231230989, email=rajusham@gmail.com
