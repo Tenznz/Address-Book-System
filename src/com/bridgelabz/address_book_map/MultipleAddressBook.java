@@ -1,9 +1,6 @@
 package com.bridgelabz.address_book_map;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.Scanner;
 
 import com.bridgelabz.address_book.AddressBook;
 import com.bridgelabz.address_book.Contact;
+import com.bridgelabz.address_book.FileCSV;
 import com.bridgelabz.address_book_io_file.AddressBookFileOperation;
 
 public class MultipleAddressBook {
@@ -19,10 +17,9 @@ public class MultipleAddressBook {
 	AddressBook addressBook = new AddressBook();
 	Contact contact = new Contact();
 	Scanner sc = new Scanner(System.in);
-	public static String bookName;
+	public static String bookName = new String();
 
 	public void newAddressBook() throws IOException {
-
 		System.out.println("Enter Book name");
 		bookName = sc.next();
 		if (book.containsKey(bookName)) {
@@ -30,7 +27,6 @@ public class MultipleAddressBook {
 		} else {
 			new AddressBook();
 			addAddressBook();
-
 			book.put(bookName, addressBook.getContactList());
 		}
 	}
@@ -48,9 +44,7 @@ public class MultipleAddressBook {
 			switch (act) {
 			case 1:
 				contactList = addressBook.addContact();
-
 				break;
-
 			case 2:
 				System.out.println("Enter your First name to update");
 				fName = sc.next();
@@ -66,15 +60,12 @@ public class MultipleAddressBook {
 				index = addressBook.getIndex(fName);
 				addressBook.removeContact(index);
 				break;
-
 			case 4:
 				addressBook.display();
 				break;
-
 			case 5:
 				addressBook.viewByCityOrStateName();
 				break;
-
 			case 6:
 				System.out.println("Sort by \n1.Name\n2.ZipCode\n3.City\n4.State");
 				int input = sc.nextInt();
@@ -88,22 +79,20 @@ public class MultipleAddressBook {
 					addressBook.sortedContactByState();
 				}
 				break;
-
 			case 7:
 				System.out.println("exit " + bookName);
 				act = 0;
-
 			}
-
 		} while (act > 0 || act > 8);
 		AddressBookFileOperation fileIO = new AddressBookFileOperation();
-		fileIO.writeAddressBookData(contactList);
+		fileIO.write(contactList);
+		FileCSV csv = new FileCSV();
+		csv.write(contactList);
+
 	}
 
 	public void displayBook() {
 		System.out.println("Total AddressBooks");
-
 		book.entrySet().stream().forEach(System.out::println);
 	}
-
 }

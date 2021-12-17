@@ -7,14 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBook {
-	String firstName;
-	String lastName;
-	String address;
-	String city;
-	String state;
-	String zip;
-	String phoneNumber;
-	String email;
+	String firstName, lastName, address, city, state, zip, phoneNumber, email;
 	static List<Contact> contactList;
 
 	public AddressBook() {
@@ -29,10 +22,8 @@ public class AddressBook {
 		AddressBook.contactList = contactList;
 	}
 
-	Scanner sc = new Scanner(System.in);
-
 	public List<Contact> addContact() {
-
+		Scanner sc = new Scanner(System.in);
 		Contact person = new Contact();
 		System.out.println("Enter your First Name");
 		firstName = sc.next();
@@ -64,11 +55,9 @@ public class AddressBook {
 			System.out.println("Duplicate value cant be add");
 		}
 		return contactList;
-
 	}
 
 	public void display() {
-
 		contactList.forEach(System.out::println);
 	}
 
@@ -83,7 +72,6 @@ public class AddressBook {
 	}
 
 	public boolean checkDuplicate(String firstName) {
-
 		for (int i = 0; i < contactList.size(); i++) {
 			if (contactList.get(i).getFirstName().contains(firstName)) {
 				return true;
@@ -102,6 +90,7 @@ public class AddressBook {
 	}
 
 	public void viewByCityOrStateName() {
+		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter State or city Name");
 		String searchText = sc.next();
 		Long count = contactList.stream()
@@ -110,11 +99,10 @@ public class AddressBook {
 		System.out.println("Total count in this city or state " + count);
 		contactList.stream().filter(el -> (el.getCity().equals(searchText) || el.getState().equals(searchText)))
 				.forEach(p -> System.out.println("First Name :" + p.getFirstName() + "\tLast Name:" + p.getLastName()));
-
 	}
 
 	public void updateContact(int i) {
-
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter your First Name");
 		firstName = sc.next();
 		System.out.println("Enter your Last Name");
@@ -139,7 +127,6 @@ public class AddressBook {
 	}
 
 	public void sortByPersonName() {
-
 		List<Contact> sortedContact = contactList.stream().sorted(new compareToFirstName())
 				.collect(Collectors.toList());
 		sortedContact.forEach(System.out::println);
@@ -147,49 +134,39 @@ public class AddressBook {
 
 	public void sortedContactByCity() {
 		contactList.stream().sorted(new compareCity()).forEach(System.out::println);
-
 	}
 
 	public void sortedContactByState() {
 		contactList.stream().sorted(new compareState()).forEach(System.out::println);
-
 	}
 
 	public void sortedContactByZip() {
 		contactList.stream().sorted(new compareZip()).forEach(System.out::println);
 	}
-
 }
 
 class compareToFirstName implements Comparator<Contact> {
-
 	@Override
 	public int compare(Contact c1, Contact c2) {
-
 		return c1.getFirstName().compareTo(c2.getFirstName());
 	}
 }
 
 class compareCity implements Comparator<Contact> {
-
 	@Override
 	public int compare(Contact c1, Contact c2) {
 		return c1.getCity().compareTo(c2.getCity());
 	}
-
 }
 
 class compareState implements Comparator<Contact> {
-
 	@Override
 	public int compare(Contact c1, Contact c2) {
 		return c1.getState().compareTo(c2.getState());
 	}
-
 }
 
 class compareZip implements Comparator<Contact> {
-
 	@Override
 	public int compare(Contact c1, Contact c2) {
 		return c1.getZip().compareTo(c2.getZip());

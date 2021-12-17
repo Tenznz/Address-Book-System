@@ -11,14 +11,15 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.bridgelabz.address_book.Contact;
+import com.bridgelabz.address_book.ReadWrite;
 import com.bridgelabz.address_book_map.MultipleAddressBook;
 
-public class AddressBookFileOperation {
+public class AddressBookFileOperation implements ReadWrite {
 	int counter = 1;
 //	public static final String loc = "D:\\project\\Learning_Path\\RFP\\Address-Book-System\\src\\AddressBook";
 	public static final String addressBookFolder = "D:\\project\\Learning_Path\\RFP\\Address-Book-System\\src";
 
-	public void readAddressBookData(String name) throws FileNotFoundException {
+	public void read(String name) throws FileNotFoundException {
 
 		File file = new File(addressBookFolder + "\\" + name + "\\" + name + ".txt");
 		Scanner sf = new Scanner(file);
@@ -28,12 +29,9 @@ public class AddressBookFileOperation {
 		sf.close();
 	}
 
-	public void writeAddressBookData(List<Contact> contactList) throws IOException {
+	public void write(List<Contact> contactList) throws IOException {
 		String url = addressBookFolder + "\\" + MultipleAddressBook.bookName;
 		Path bookPath = Paths.get(url);
-//		if (Files.exists(bookPath))
-//			deleteFiles(bookPath.toFile());
-
 		Files.createDirectories(bookPath);
 		String bookFileWrite = url + "\\" + MultipleAddressBook.bookName + ".txt";
 		Path bookFile = Paths.get(bookFileWrite);
@@ -48,12 +46,5 @@ public class AddressBookFileOperation {
 		output.write(addressBuffer.toString());
 		System.out.println("Data added in file.");
 		output.close(); // Closes the writer
-
 	}
-
-//	private boolean deleteFiles(File file) {		
-//				deleteFiles(file);
-//		return file.delete();
-//
-//	}
 }

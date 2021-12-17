@@ -163,5 +163,4 @@ public class Contact {
 			return false;
 		return true;
 	}
-
 }
